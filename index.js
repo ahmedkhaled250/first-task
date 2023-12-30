@@ -1,0 +1,13 @@
+import express from "express";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import path from "path";
+import initApp from "./src/index.router.js";
+import DBConnection from "./DB/DBConnection.js";
+const __direName = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__direName, "./config/.env") });
+const port = process.env.PORT || 5000;
+const app = express();
+initApp(app, express);
+DBConnection();
+app.listen(port, () => console.log(`running on port...............${port}`));
